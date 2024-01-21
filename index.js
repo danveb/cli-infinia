@@ -4,6 +4,8 @@ import chalk from "chalk"; // Chalk 5 is ESM so we'll "import" to ES Module inst
 import chalkAnimation from "chalk-animation"; 
 import inquirer from "inquirer"; 
 import { createSpinner } from "nanospinner"; 
+import gradient from "gradient-string"; 
+import figlet from "figlet"; 
 
 // console.log(chalk.bgGreen("Hello World")); 
 
@@ -39,7 +41,7 @@ async function handleAnswer2(isAnswer) {
   await sleep(); 
   // check: if input isAnswer we'll issue a success message
   if(isAnswer) {
-    spinner.success({ text: `Hey ${userName} you do have some experience, keep it up!`}); 
+    spinner.success({ text: `Hey ${userName}, keep it up!`}); 
   } else {
     spinner.error({ text: `Well it looks like you could use some time to study more...`});
     process.exit(1); 
@@ -54,15 +56,12 @@ async function welcome() {
   rainbowTitle.stop(); 
   // print out main body 
   console.log(`
-  ${chalk.bgCyan("Hello World")}
-  I am a ${chalk.underline("INFINIA")}, a command-line interface living through time and space. 
-  Just be yourself; there is no ${chalk.cyan("right or wrong")} answer here.
-  Happy coding! 
+    ${chalk.bgCyan("Hello World")}
+    I am a ${chalk.underline("INFINIA")}, a command-line interface living through time and space. 
+    Just be yourself; there is no ${chalk.cyan("right or wrong")} answer here. 
+    Happy coding! 
   `)
 };
-
-// node.js 14+ for top-level await (outside of async function body) 
-await welcome(); 
 
 // async function askName 
 // prompt user for name and return it 
@@ -77,8 +76,6 @@ async function askName() {
   })
   userName = answer.user_name; 
 };
-
-await askName(); 
 
 // async function question1 
 // prompt user for question1 
@@ -104,15 +101,31 @@ async function question2() {
     type: "list", 
     message: "How many years of experience do you currently have?\n", 
     choices: [
-      "0 - 1", 
+      "🔥 I'm just getting started!", 
       "1 - 2", 
       "2 - 3", 
       "3+", 
-      "?", 
+      "Eh?", 
     ],
   })
-  return handleAnswer2(answer.question_2 !== "?"); 
+  return handleAnswer2(answer.question_2 !== "Eh?"); 
 };
 
+// async function for end 
+async function end() {
+  console.clear(); 
+  const msg = `
+    Well done, ${userName} ! \n
+    CLI-INFINIA thanks you! 
+  `
+  figlet(msg, function(err, data) {
+    console.log(gradient.pastel.multiline(data));
+  })
+}; 
+
+// node.js 14+ for top-level await (outside of async function body) 
+await welcome(); 
+await askName(); 
 await question1(); 
 await question2(); 
+await end(); 
