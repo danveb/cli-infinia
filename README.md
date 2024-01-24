@@ -27,5 +27,8 @@ $ yarn start
 $ npm start
 ```
 
-## Repo 
+## NPM/Yarn 
 [npm] https://www.npmjs.com/package/cli-infinia
+
+## GitHub Repo 
+https://github.com/danveb/cli-infinia
