@@ -1,10 +1,8 @@
 # cli-infinia
 
-> [!NOTE]
-> ***A command-line interface that incorporates a series of simple questions to get to know what type of developer a user is.***
+A command-line interface that incorporates a series of simple questions to get to know what type of developer a user is.
 
-> [!IMPORTANT]
-> **Play the game**
+**Play the game**
 ```
 $ npx cli-infinia
 ```
